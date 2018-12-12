@@ -38,4 +38,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sinatra-contrib"
   spec.add_development_dependency "thin"
   spec.add_development_dependency "httplog"
+  spec.add_development_dependency "capybara-screenshot"
+
 end

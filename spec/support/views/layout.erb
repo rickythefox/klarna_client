@@ -82,12 +82,13 @@
       var createKlarnaOder = function() {
         $sessionPanel.collapse('show');
 
-        Klarna.Credit.init ({
+        Klarna.Payments.init ({
           client_token: $sessionBox.html()
         });
 
-        Klarna.Credit.load ({
-            container: "#klarna_container"
+        Klarna.Payments.load ({
+            container: "#klarna_container",
+            payment_method_category: 'pay_later'
           },
           KlarnaAssessmentCallback
         );
@@ -108,7 +109,9 @@
       $authorizationPanelContinueButton.on('click', function(event) {
         event.stopImmediatePropagation();
         event.preventDefault();
-        Klarna.Credit.authorize(function(result) {
+        Klarna.Payments.authorize({
+          payment_method_category: 'pay_later'
+        },function(result) {
           if (result.authorization_token !== undefined) {
             $authorizationToken.val(result.authorization_token);
             $orderCreateForm.submit();
@@ -165,18 +168,8 @@
     }); //Window On-Load
 
   </script>
-  <script type="text/javascript" id="klarna­credit­lib­x">
-  /* <![CDATA[ */
-   (function(w, d) {
-     var url = 'https://credit.klarnacdn.net/lib/v1/api.js';
-      n = d.createElement('script');
-      c = d.getElementById('klarna­credit­lib­x');
-      n.async = !0;
-      n.src = url + '?' + (new Date ()).getTime();
-      c.parentNode.replaceChild(n, c);
-    })(this, document);
-   /* ]]> */
-  </script>
+  <script src="https://x.klarnacdn.net/kp/lib/v1/api.js" async></script>
+
   <style type="text/css">
     .navbar-inverse {
       background-color: #0074C8;

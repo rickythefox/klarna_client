@@ -24,7 +24,7 @@ module Klarna
         }
       }
       @version = :v1
-      @debugger = false #$stdout
+      @debugger = $stdout # false
     end
 
     def endpoint

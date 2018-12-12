@@ -8,7 +8,6 @@ module Klarna
       @configuration = configuration
     end
 
-
     private
 
     def do_request(type, service, &block)

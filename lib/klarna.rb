@@ -6,6 +6,7 @@ require "klarna/order"
 require "klarna/capture"
 require "klarna/credit"
 require "klarna/refund"
+require "klarna/payments"
 
 module Klarna
   class << self
@@ -22,6 +23,8 @@ module Klarna
 
   def self.client(type = :order)
     case type
+    when :payments
+      Payments.new(configuration)
     when :credit
       Credit.new(configuration)
     when :order
@@ -30,6 +33,8 @@ module Klarna
       Refund.new(configuration)
     when :capture
       Capture.new(configuration)
+    else
+      raise "No such type #{type}"
     end
   end
 end
